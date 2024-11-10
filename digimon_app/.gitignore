@@ -2,4 +2,6 @@
 
 *.idea
 #ignorará los archivos .idea
+__pycache__
+# para ignorar los archivos pycache
 
