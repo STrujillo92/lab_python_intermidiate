@@ -6,5 +6,10 @@
 </head>
 <body>
     <p>Mi app ownwe hija está funcionando. STC</p>
+<!--    <p>{{data.nombre}} tiene {{data.edad}} años y es de {{data.pais}}.</p>-->
+    {% for owner in data %}
+        <p>{{ owner.nombre }} tiene {{ owner.edad }} años y es de {{ owner.pais }}</p>
+    {% endfor %}
+
 </body>
 </html>
