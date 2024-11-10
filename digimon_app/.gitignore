@@ -1,0 +1,5 @@
+#Actualización de archivos para ignorara en Github
+
+*.idea
+#ignorará los archivos .idea
+
