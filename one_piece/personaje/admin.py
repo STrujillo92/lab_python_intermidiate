@@ -6,4 +6,5 @@ from personaje.models import Personaje
 # Register your models here.
 @admin.register(Personaje)
 class PersonajeAdmin(admin.ModelAdmin):
-    pass
+    list_filter = ('vivo','raza')
+    search_fields = ('nombre_personaje',)
