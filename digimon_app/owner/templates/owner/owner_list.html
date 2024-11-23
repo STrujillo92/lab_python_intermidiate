@@ -1,15 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Owner List</title>
-</head>
-<body>
-    <p>Mi app ownwe hija está funcionando. STC</p>
+{% extends "owner/base_generic.html" %}
+
+{% block content %}
+    <p>Bienvenidos</p>
 <!--    <p>{{data.nombre}} tiene {{data.edad}} años y es de {{data.pais}}.</p>-->
     {% for owner in data %}
-        <p>{{ owner.nombre }} tiene {{ owner.edad }} años y es de {{ owner.pais }}</p>
+        <p> <strong>Nombre: </strong>{{ owner.nombre }}</p>
+        <p> <strong>Edad: </strong>{{ owner.edad }}</p>
+        <p> <strong>País: </strong>{{ owner.pais }}</p>
+        {% if owner.edad > 18 %}
+            <p>Usted ya es mayor de edad.</p>
+        {% else %}
+            <p>Usted todavía no es mayor de edad.</p>
+        {% endif %}
+
+        {% if owner.dni %}
+            {% if not owner.vigente %}
+                <p>Su pase está por vencer.</p>
+            {% else %}
+                <p>Su pase está vigente.</p>
+            {% endif %}
+        {% endif %}
+
+        {% for pokemon in owner.pokemons %}
+            <p> <strong>Su lista de pokemons es:</strong>  {{pokemon.nombre_p}}</p>
+            <p>Sus ataques son:</p>
+            {% for ataque in pokemon.ataques %}
+                <p> <strong> {{ataque}} </strong></p>
+            {% endfor %}
+        {% endfor %}
+
+        {% comment %}
+            <p>Texto de prueba</p>
+        {% endcomment %}
     {% endfor %}
 
-</body>
-</html>
+    {% for owner in data %}
+        <p><strong>Nombre de owner: </strong>{{owner.nombre | lower}}</p>
+        <p><strong>Cantidad de caracteres: </strong>{{owner.nombre | length}}</p>
+        <p><strong>Uso de Pipe slugify: </strong>{{owner.nombre | slugify}}</p>
+        <p><strong>Uso de Pipe upper: </strong>{{owner.nombre | upper}}</p>
+        <p><strong>Uso de Pipe cut: </strong>{{owner.nombre | cut:" "}}</p>
+    {% endfor %}
+{% endblock %}

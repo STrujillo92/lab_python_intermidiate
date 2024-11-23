@@ -8,15 +8,31 @@ def owner_list(request):
        # 'pais':'Perú'
     #}
     data_context=[
-        {'nombre': 'Katty',
+        {'nombre': 'Katty Lopez',
          'edad': 26,
-         'pais':'Perú'},
-        {'nombre': 'Benito',
+         'pais':'Perú',
+         'dni':'23231212',
+         'vigente':True,
+         'pokemons': [
+             {'nombre_p': 'charizard',
+              'ataques': ['ataque1-ch','ataque2-ch','ataque3-ch','ataque4-ch']
+              }
+         ]},
+        {'nombre': 'Benito Sanchez',
          'edad': 22,
-         'pais':'España'},
-        {'nombre': 'Marianela',
+         'pais':'España',
+         'dni': '45452323',
+         'vigente' : False },
+        {'nombre': 'Marianela Rivera',
          'edad': 18,
-         'pais':'Brasil'}
+         'pais':'Brasil',
+         'dni': '78781212',
+         'vigente' : False },
+        {'nombre': 'Lucia Falconi',
+         'edad': 15,
+         'pais': 'Marruecos',
+         'dni': '56562323',
+         'vigente' : True }
     ]
     return render(request, 'owner/owner_list.html',context={'data':data_context})
 
