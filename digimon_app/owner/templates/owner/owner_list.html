@@ -3,36 +3,38 @@
 {% block content %}
     <p>Bienvenidos</p>
 <!--    <p>{{data.nombre}} tiene {{data.edad}} años y es de {{data.pais}}.</p>-->
-    {% for owner in data %}
-        <p> <strong>Nombre: </strong>{{ owner.nombre }}</p>
-        <p> <strong>Edad: </strong>{{ owner.edad }}</p>
-        <p> <strong>País: </strong>{{ owner.pais }}</p>
-        {% if owner.edad > 18 %}
-            <p>Usted ya es mayor de edad.</p>
-        {% else %}
-            <p>Usted todavía no es mayor de edad.</p>
-        {% endif %}
-
-        {% if owner.dni %}
-            {% if not owner.vigente %}
-                <p>Su pase está por vencer.</p>
+    {% if data %}
+        {% for owner in data %}
+            <p> <strong>Nombre: </strong>{{ owner.nombre }}</p>
+            <p> <strong>Edad: </strong>{{ owner.edad }}</p>
+            <p> <strong>País: </strong>{{ owner.pais }}</p>
+            {% if owner.edad > 18 %}
+                <p>Usted ya es mayor de edad.</p>
             {% else %}
-                <p>Su pase está vigente.</p>
+                <p>Usted todavía no es mayor de edad.</p>
             {% endif %}
-        {% endif %}
 
-        {% for pokemon in owner.pokemons %}
-            <p> <strong>Su lista de pokemons es:</strong>  {{pokemon.nombre_p}}</p>
-            <p>Sus ataques son:</p>
-            {% for ataque in pokemon.ataques %}
-                <p> <strong> {{ataque}} </strong></p>
-            {% endfor %}
+            {% if owner.dni %}
+                {% if not owner.vigente %}
+                    <p>Su pase está por vencer.</p>
+                {% else %}
+                    <p>Su pase está vigente.</p>
+                {% endif %}
+            {% endif %}
+
+            {% comment %}
+                {% for pokemon in owner.pokemons %}
+                    <p> <strong>Su lista de pokemons es:</strong>  {{pokemon.nombre_p}}</p>
+                    <p>Sus ataques son:</p>
+                    {% for ataque in pokemon.ataques %}
+                        <p> <strong> {{ataque}} </strong></p>
+                    {% endfor %}
+                {% endfor %}
+            {% endcomment %}
         {% endfor %}
-
-        {% comment %}
-            <p>Texto de prueba</p>
-        {% endcomment %}
-    {% endfor %}
+    {% else %}
+        <p>No hay datos que coincidan.</p>
+    {% endif %}
 
     {% for owner in data %}
         <p><strong>Nombre de owner: </strong>{{owner.nombre | lower}}</p>

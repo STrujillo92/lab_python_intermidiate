@@ -17,14 +17,14 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Crear Owner</a>
+                    <a class="nav-link active" aria-current="page" href="{% url 'owner_create' %}">Crear Owner</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Buscar Owner</a>
+                    <a class="nav-link" href="{% url 'owner_search' %}">Buscar Owner</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link disabled" aria-disabled="true">Ver todos los owners</a>
+                    <a class="nav-link" aria-disabled="true" href="{% url 'owner_details' %}">Ver todos los owners</a>
                 </li>
             </ul>
             <form class="d-flex" role="search">
