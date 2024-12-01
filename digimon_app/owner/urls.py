@@ -14,4 +14,10 @@ urlpatterns = [
     path('owner_delete/<int:id_owner>', views.owner_delete, name='owner_delete'),
 
     path('owner_edit/<int:id_owner>', views.owner_edit, name='owner_edit'),
+
+    #URL para VBC
+    path('owner_list_vbc',views.OwnerList.as_view(), name='owner_list_vbc'),
+    path('owner_create_vc',views.OwnerCreate.as_view(), name='owner_create_vc'),
+    path('owner_edit_vc/<int:pk>',views.OwnerUpdate.as_view(), name='owner_edit_vc'),
+    path('owner_delete_vc/<int:pk>',views.OwnerDelete.as_view(), name='owner_delete_vc'),
 ]

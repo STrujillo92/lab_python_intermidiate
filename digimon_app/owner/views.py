@@ -4,6 +4,10 @@ from django.shortcuts import render, redirect
 from owner.models import Owner
 from owner.forms import OwnerForm
 
+from django.views.generic import ListView, CreateView,UpdateView, DeleteView
+from django.urls import reverse_lazy
+
+
 # Create your views here.
 def owner_list(request):
     #data_context={
@@ -175,3 +179,25 @@ def owner_edit(request,id_owner):
 
     return render(request,'owner/owner_edit.html',{'form':form})
 
+'''Vistas basadas en clases'''
+'''ListView, CreateView, UpdateView, DeleteView'''
+
+class OwnerList(ListView):
+    model = Owner
+    template_name = 'owner/owner_list_vc.html'
+
+class OwnerCreate(CreateView):
+    model = Owner
+    form_class = OwnerForm
+    template_name = "owner/owner_create.html"
+    success_url = reverse_lazy('owner_list_vbc.html')
+
+class OwnerUpdate(UpdateView):
+    model = Owner
+    form_class = OwnerForm
+    template_name = 'owner/owner_update_vc.html'
+
+class OwnerDelete(DeleteView):
+    model = Owner
+    success_url = reverse_lazy('owner_list_vbc')
+    template_name = 'owner/owner_confirm_delete.html'
