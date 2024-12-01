@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'owner.apps.OwnerConfig',
     'country.apps.CountryConfig',
     'digimon.apps.DigimonConfig',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [

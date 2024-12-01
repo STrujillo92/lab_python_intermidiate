@@ -1,3 +1,5 @@
+from dataclasses import fields
+
 from django.db.models import F, Q
 from django.shortcuts import render, redirect
 
@@ -6,6 +8,14 @@ from owner.forms import OwnerForm
 
 from django.views.generic import ListView, CreateView,UpdateView, DeleteView
 from django.urls import reverse_lazy
+
+from django.core import serializers as ssr
+from django.http import HttpResponse
+
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
+from owner.serializers import OwnerSerializer
 
 
 # Create your views here.
@@ -201,3 +211,20 @@ class OwnerDelete(DeleteView):
     model = Owner
     success_url = reverse_lazy('owner_list_vbc')
     template_name = 'owner/owner_confirm_delete.html'
+
+'''Serializers'''
+
+def ListOwnerSerializer(request):
+    list_owner = ssr.serialize('json',Owner.objects.all(),fields = ['nombre','pais','edad','dni'])
+    return HttpResponse(list_owner,content_type='application/json')
+
+'''API'''
+
+@api_view(['GET'])
+def owner_api_view(request):
+    if request.method == 'GET':
+        print('Ingresó a GET')
+        queryset = Owner.objects.all()
+        serializers_class = OwnerSerializer(queryset, many=True)
+
+    return Response(serializers_class.data)
