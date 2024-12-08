@@ -10,11 +10,13 @@ from django.urls import reverse_lazy
 from django.core import serializers as ssr
 from django.http import HttpResponse
 
-from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 
 from apps.owner.serializers import OwnerSerializer
+
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
 
 
 # Create your views here.
@@ -220,6 +222,7 @@ def ListOwnerSerializer(request):
 '''API'''
 
 @api_view(['GET','POST'])
+@permission_classes([IsAuthenticated])
 def owner_api_view(request):
     if request.method == 'GET':
         print('Ingresó a GET')
@@ -237,6 +240,7 @@ def owner_api_view(request):
         return Response(serializers_class.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET','PUT','DELETE'])
+@permission_classes([IsAuthenticated])
 def owner_details_view(request,pk):
     owner = Owner.objects.get(id=pk)
     if owner:
